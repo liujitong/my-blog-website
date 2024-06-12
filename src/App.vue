@@ -1,17 +1,17 @@
 <template>
   <div id="app">
+    <h1>{{radio}}</h1>
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="welcome to no1"/>
+    <br>
+    <el-radio v-model="radio" label="1">1</el-radio>
+    <el-radio v-model="radio" label="2">2</el-radio>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
   components: {
-    HelloWorld
   }
 }
 </script>
