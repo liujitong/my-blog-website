@@ -1,10 +1,10 @@
-package xyz.mlxkj.server;
+package xyz.mlxkj.myblog_server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServerApplicationTests {
+class MyblogServerApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,13 +1,13 @@
-package xyz.mlxkj.server;
+package xyz.mlxkj.myblog_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServerApplication {
+public class MyblogServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServerApplication.class, args);
+		SpringApplication.run(MyblogServerApplication.class, args);
 	}
 
 }

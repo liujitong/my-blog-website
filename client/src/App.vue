@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'App',
   components: {
@@ -25,7 +26,11 @@ export default {
         radio2: '3'
       };
     },
-  
+  mounted() {
+  axios.get('^/check/usercheck?name=1&password=1').then(response => {
+    console.log(response);
+  });
+  }
 }
 </script>
 
