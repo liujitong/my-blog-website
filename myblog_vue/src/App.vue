@@ -1,38 +1,8 @@
 <template>
   <div id="app">
-
-    <img alt="Vue logo" src="./assets/logo.png">
-    <br>
-    <el-radio v-model="radio1" label="1">1</el-radio>
-    <el-radio disabled v-model="radio1" label="2">2</el-radio>
-    <el-radio v-model="radio2" label="3">3</el-radio>
-    <el-radio v-model="radio2" label="4">4</el-radio>
-    <h1 v-if="radio1==1">{{radio1}}</h1>
-    <h2>{{ radio2 }}</h2>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import axios from 'axios';
-export default {
-  name: 'App',
-  components: {
-  },
-  methods: {
-  },
-  data () {
-      return {
-        radio1: '1',
-        radio2: '3'
-      };
-    },
-  mounted() {
-  axios.get('^/check/usercheck?name=1&password=1').then(response => {
-    console.log(response);
-  });
-  }
-}
-</script>
 
 <style>
 #app {
@@ -41,6 +11,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

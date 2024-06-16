@@ -12,14 +12,14 @@ public class result implements Serializable {
     private Object Data;
     public static result succ(Object data) {
         result m = new result();
-        m.setCode("0");
+        m.setCode("200");
         m.setData(data);
         m.setMsg("操作成功");
         return m;
     }
     public static result succ(String mess, Object data) {
         result m = new result();
-        m.setCode("0");
+        m.setCode("200");
         m.setData(data);
         m.setMsg(mess);
         return m;

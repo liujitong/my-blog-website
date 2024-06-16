@@ -28,7 +28,7 @@ public class CodeGenerator {
                             .xml("mappers"); // 设置 Mapper XML 文件包名
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("users") // 设置需要生成的表名
+                    builder.addInclude("blogs") // 设置需要生成的表名
                             .entityBuilder()
                             .enableLombok() // 启用 Lombok
                             .enableTableFieldAnnotation() // 启用字段注解
