@@ -25,7 +25,7 @@ import "element-ui/lib/theme-chalk/index.css"
 import "mavon-editor/dist/css/index.css"
 Vue.use(mavonEditor)
 
-Vue.use(mavonEditor)
+
 new Vue({
   router,
   store,
