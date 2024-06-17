@@ -12,10 +12,11 @@ router.beforeEach((to,from,next)=>{
         //获取存储在sessionStorage中的UserInfo对象
         let user = JSON.parse(sessionStorage.getItem('UserInfo'))
         //如果user合法
-        if (user.username !==""){
+        if (user){
             
             //如果指向的是登录页面，不做任何操作
             if (to.path === "/login"){
+                
 
             }else {
 
@@ -29,8 +30,8 @@ router.beforeEach((to,from,next)=>{
         //    如果token不存在
         //    前往登录
         //    弹出提示框
-            console.log(user.username);
-            ElementUI.Message.error('请先登录')
+      
+        ElementUI.Message.error('请先登录')
 
             next({path:'/login'})
         }

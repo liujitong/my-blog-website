@@ -24,6 +24,20 @@ public class result implements Serializable {
         m.setMsg(mess);
         return m;
     }
+    public static result succ() {
+        result m = new result();
+        m.setCode("200");
+        m.setData(null);
+        m.setMsg("操作成功");
+        return m;
+    }
+    public static result succ(String mess) {
+        result m = new result();
+        m.setCode("200");
+        m.setData(null);
+        m.setMsg(mess);
+        return m;
+    }
     public static result fail(String mess) {
         result m = new result();
         m.setCode("-1");

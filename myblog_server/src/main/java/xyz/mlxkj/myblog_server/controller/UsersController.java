@@ -22,7 +22,7 @@ public class UsersController {
     private UsersMapper usersMapper;
 
     @RequestMapping("{uid}")
-    public Object getUserById(@PathVariable("uid") Integer uid) {
+    public result getUserById(@PathVariable("uid") Integer uid) {
         return result.succ(usersMapper.selectById(uid));
     }
 

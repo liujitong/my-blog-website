@@ -35,9 +35,16 @@ const routes = [
       meta: {
           requireAuth: true
       }
-  },
-
-
+    },
+    {
+      path: '/blog/:bid/edit',
+      name: 'BlogEdit',
+      component: BlogEdit,
+      //添加权限访问，表示只有登录之后才能进行该操作
+      meta: {
+          requireAuth: true
+      }
+    },
 ]
 
 const router = new VueRouter({
