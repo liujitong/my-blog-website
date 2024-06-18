@@ -25,7 +25,7 @@ public class BlogsController {
 
     @RequestMapping("/edit")
     public result editBlog(@RequestBody @Validated Blogs blog){
-        System.out.println(blog);
+
         blog.setCreated(LocalDateTime.now());
         return blogsService.editBlog(blog);
     }

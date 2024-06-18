@@ -152,6 +152,11 @@
 
   - 请求方式：GET
   - 请求路径：/users/{uid}
+  - 请求路径参数：
+
+    | 参数名 | 参数类型 | 是否必须 | 说明   |
+    | ------ | -------- | -------- | ------ |
+    | uid    | Integer  | 是       | 用户ID |
   - 请求参数：无
   - 返回参数：
 
@@ -179,6 +184,40 @@
   }
   ```
 
+- 修改用户信息接口
+
+  - 请求方式：POST
+  - 请求路径：/users/edit
+  - 请求参数：
+
+    | 参数名      | 参数类型 | 是否必须 | 说明   |
+    | ----------- | -------- | -------- | ------ |
+    | uid         | Integer  | 是       | 用户ID |
+    | username    | String   | 否       | 用户名 |
+    | password    | String   | 否       | 密码   |
+    | mail        | String   | 否       | 邮箱   |
+    | url         | String   | 否       | 网址   |
+    | screenName  | String   | 否       | 昵称   |
+    | group       | String   | 否       | 用户组 |
+
+  - 返回参数：
+
+    ```json
+    {
+    "data": null,
+    "code": "200",
+    "msg": "操作成功"
+    }
+    ```
+
+    ```json
+    {
+      "data":null,
+      "code":"-1",
+      "msg":"用户不存在"
+    }
+    ```
+
 ### 文章模块
 
 - 编辑（新增）文章接口
@@ -200,9 +239,173 @@
 
     ```json
     {
-    "data": 1,
-    "code": "200",
-    "msg": "操作成功"
+      "data": null,
+      "code": "-1",
+      "msg": "博客不存在"
+    }
+    ```
+
+    ```json
+    {
+      "data": null,
+      "code": "200",
+      "msg": "操作成功"
+    }
+    ```
+
+    ```json
+    {
+      "data": 12,
+      "code": "200",
+      "msg": "数据库操作成功"
+    } 
+    ```
+
+- 删除文章接口
+
+  - 请求方式：GET
+  - 请求路径：/blogs/delete/{bid}?uid={uid}
+
+    - 请求路径参数:
+
+  | 参数名 | 参数类型 | 是否必须 | 说明   |
+  | ------ | -------- | -------- | ------ |
+  | bid    | Integer  | 是       | 文章ID |
+  | uid    | Integer  | 是       | 作者ID |
+
+  - 请求参数：无
+  - 返回参数：
+
+    ```json
+    {
+        "data": null,
+        "msg": "删除成功",
+        "code": "200"
+    }
+    ```
+
+    ```json
+    {
+      "data": null,
+      "msg": "博客不存在",
+      "code": "-1"
+    }
+    ```
+
+  ```json
+    {
+        "data": null,
+        "msg": "无权限删除",
+        "code": "-1"
+    }
+    ```
+
+- 获取文章列表接口
+
+  - 请求方式：GET
+  - 请求路径：/blogs/list?currentPage={currentPage}
+  - 请求路径参数：
+
+    | 参数名      | 参数类型 | 是否必须 | 说明     |
+    | ----------- | -------- | -------- | -------- |
+    | currentPage | Integer  | 是       | 当前页数 |
+
+  - 返回参数：
+
+    ```json
+    {
+    "data": {
+      "records": [
+        {
+          "bid": 1,
+          "uid": 1,
+          "title": "测试测试",
+          "descp": "测试文档",
+          "content": "# 我的测试文档第一个\n第一个测试文档",
+          "created": "2024-06-17 16:11"
+        },
+        {
+          "bid": 6,
+          "uid": 1,
+          "title": "ssssssss",
+          "descp": "ssssss",
+          "content": "sssss",
+          "created": "2024-06-17 13:38"
+        },
+        {
+          "bid": 4,
+          "uid": 1,
+          "title": "ssssssss",
+          "descp": "ssssss",
+          "content": "sssss",
+          "created": "2024-06-16 16:38"
+        },
+        {
+          "bid": 5,
+          "uid": 1,
+          "title": "ssssssss",
+          "descp": "ssssss",
+          "content": "sssss",
+          "created": "2024-06-16 16:38"
+        }
+      ],
+      "total": 4,
+      "size": 5,
+      "current": 1,
+      "pages": 1
+    },
+    "msg": "操作成功",
+    "code": "200"
+    }
+    ```
+
+    ```json
+    {
+      "data": {
+        "records": [],
+        "total": 4,
+        "size": 5,
+        "current": 2,
+        "pages": 1
+      },
+      "msg": "操作成功",
+      "code": "200"
+    }
+    ```
+
+- 获取文章详细信息接口
+
+  - 请求方式：GET
+  - 请求路径：/blogs/{bid}
+  - 请求路径参数：
+
+    | 参数名 | 参数类型 | 是否必须 | 说明   |
+    | ------ | -------- | -------- | ------ |
+    | bid    | Integer  | 是       | 文章ID |
+
+  - 请求参数：无
+  - 返回参数：
+
+    ```json
+    {
+    "data": {
+      "bid": 1,
+      "uid": 1,
+      "title": "测试测试",
+      "descp": "测试文档",
+      "content": "# 我的测试文档第一个\n第一个测试文档",
+      "created": "2024-06-17 16:11"
+    },
+    "msg": "操作成功",
+    "code": "200"
+    }
+    ```
+
+    ```json
+    {
+      "data": null,
+      "msg": "博客不存在",
+      "code": "-1"
     }
     ```
 

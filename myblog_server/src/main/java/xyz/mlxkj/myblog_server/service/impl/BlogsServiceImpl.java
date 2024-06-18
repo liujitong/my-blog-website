@@ -51,6 +51,9 @@ public class BlogsServiceImpl extends ServiceImpl<BlogsMapper, Blogs> implements
         else {
             //查询bid的内容
             Blogs oldBlog = blogsMapper.selectById(blog.getBid());
+            if(oldBlog==null){
+                return result.fail("博客不存在");
+            }
             Users user = usersMapper.selectById(blog.getUid());
             //查询bid的uid和传入的uid是否一致
             if(oldBlog.getUid().equals(blog.getUid())){
@@ -78,6 +81,10 @@ public class BlogsServiceImpl extends ServiceImpl<BlogsMapper, Blogs> implements
 
     @Override
     public result deleteBlog(Integer bid, Long uid) {
+        //如果bid不存在
+        if(blogsMapper.selectById(bid)==null){
+            return result.fail("博客不存在");
+        }
         //如果uid是管理员或者uid和bid的uid一致
         System.out.println("uid"+uid);
         System.out.println("bid"+bid);

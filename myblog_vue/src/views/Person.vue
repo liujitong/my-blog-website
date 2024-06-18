@@ -147,6 +147,14 @@ export default {
         //设置加载状态
         this.loading_S = false;
       }
+      else{
+        this.$message({
+          message: "获取用户信息失败",
+          type: "error"
+        });
+        //去首页
+        this.$router.push("/blog");
+      }
     }).catch(err=>{
       console.log(err);
     })
