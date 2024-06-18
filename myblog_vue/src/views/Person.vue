@@ -45,8 +45,8 @@
             <i class="el-icon-user"></i>
             用户组
           </template>
-          <a v-if="this_user.group='visitor'">访客</a>
-          <a v-if="this_user.group='adminstrator'">管理员</a>
+          <a v-if="this_user.group==='visitor'">访客</a>
+          <a v-if="this_user.group==='adminstrator'">管理员</a>
         </el-descriptions-item>
       </el-descriptions>
     </el-card>
@@ -99,7 +99,7 @@ export default {
       this_user:{
         username: "",
         mail: "",
-        group: '',
+        group: 'not login',
         uid: "",
         url: "",
         screenName: ""
@@ -118,7 +118,7 @@ export default {
       .catch(_ => {});
     },
     submit(){
-      this.$axios.put("http://localhost:8081/this_users/edit/",this.this_user).then(res1=>{
+      this.$axios.put("http://localhost:8081/users/edit/",this.this_user).then(res1=>{
         if(res1.data.code=="200"){
           this.$message({
             message: "修改成功",
@@ -143,12 +143,8 @@ export default {
           message: "获取用户信息成功",
           type: "success"
         });
-        this.this_user.username = res1.data.data.username;
-        this.this_user.mail = res1.data.data.mail;
-        this.this_user.screenName = res1.data.data.screenName;
-        this.this_user.url = res1.data.data.url; 
-        this.this_user.group = res1.data.data.group;
-        console.log(this.this_user);
+        this.this_user = res1.data.data;
+        //设置加载状态
         this.loading_S = false;
       }
     }).catch(err=>{

@@ -11,7 +11,10 @@
 
     <div class="maction">
       <span v-if="user.name!==null">
-        {{user.name}}
+        <router-link :to="{name:'Person',params:{uid: this.user.uid}}">
+                            {{ this.user.name }}
+                        </router-link>
+      
       </span>
       <span v-else> 
         <router-link :to="{name:'Person',params:{uid: this.user.uid}}">
@@ -95,6 +98,18 @@ export default {
   },
   //初始化操作
   created () {
+    console.log(this.$store.getters.getUserInfo)
+    if (this.$store.getters.getUserInfo.username) {
+      this.user.mail = this.$store.getters.getUserInfo.mail;
+      this.user.group = this.$store.getters.getUserInfo.group;
+      this.user.url = this.$store.getters.getUserInfo.url;
+      this.user.name = this.$store.getters.getUserInfo.screenName;
+      this.user.uid = this.$store.getters.getUserInfo.uid;
+      console.log(this.$store.getters.getUserInfo.username)
+      this.haslogin = true;
+    }
+  },
+  activated(){
     console.log(this.$store.getters.getUserInfo)
     if (this.$store.getters.getUserInfo.username) {
       this.user.mail = this.$store.getters.getUserInfo.mail;
