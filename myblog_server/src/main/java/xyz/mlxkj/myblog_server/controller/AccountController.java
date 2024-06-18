@@ -23,4 +23,9 @@ public class AccountController {
         return usi.register(lms.getUsername(), lms.getPassword());
     }
 
+    @PostMapping("/changePwd")
+    public result changePwd(@Validated @RequestBody AccountMsg lms) {
+        return usi.changePwd(lms.getUsername(), lms.getPassword());
+    }
+
 }

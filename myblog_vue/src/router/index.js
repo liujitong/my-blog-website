@@ -12,6 +12,7 @@ import Blog from '../views/Blog.vue'
 import BlogEdit from '../views/BlogEdit.vue'
 import BlogView from '../views/BlogView.vue'
 import Register from '../views/Register.vue'
+import ResetPwd from '../views/ResetPwd.vue'
 import Person from '../views/Person.vue'
 
 Vue.use(VueRouter)
@@ -63,6 +64,11 @@ const routes = [
       meta: {
           requireAuth: true
       }
+    },
+    {
+      path:'/resetpwd',
+      name: 'ResetPwd',
+      component: ResetPwd
     }
 ]
 

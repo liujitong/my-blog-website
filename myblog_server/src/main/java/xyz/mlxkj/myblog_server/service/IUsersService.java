@@ -17,4 +17,6 @@ public interface IUsersService extends IService<Users> {
     public result login(String username, String pwd);
 
     result register(String username, String password);
+
+    result changePwd(String username, String password);
 }

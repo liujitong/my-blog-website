@@ -47,4 +47,16 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
             return result.fail("注册失败");
         }
     }
+
+    @Override
+    public result changePwd(String username, String password) {
+        Users user = usersMapper.searchByUsername(username);
+        if(user == null) {
+            return result.fail("用户不存在");
+        }
+        user.setPwd(password);
+        usersMapper.updateById(user);
+        return result.succ("修改成功");
+
+    }
 }

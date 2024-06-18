@@ -30,7 +30,7 @@
 
 #### 前端架构
 
-前端使用Vue.js框架，使用Vue Router进行路由管理，使用Vuex进行状态管理，使用axios进行网络请求。
+前端使用Vue.js框架，使用Vue Router进行路由管理，使用Vuex进行状态管理，使用axios进行网络请求。我同时引入了ElementUI组件库，使用ElementUI的组件来构建页面。使用了`mavon-editor`这个Vue.js的Markdown编辑器组件来编辑和查看博客。
 
 #### 后端架构
 
@@ -46,51 +46,138 @@
 
 ##### 博客详细信息模块
 
-我们使用了现在比较流行的轻量化标记语言Markdown来书写博客，所以我们需要一个Markdown编辑器来编辑博客。在此我引入了`mavon-editor`这个Vue.js的Markdown编辑器组件。同时用`github-markdown-css`来渲染Markdown文本。用`markdown-it`来解析Markdown文本。
+我们使用了现在比较流行的轻量化标记语言Markdown来书写博客，所以我们需要一个Markdown编辑器来编辑博客。在此我引入了 `mavon-editor`这个Vue.js的Markdown编辑器组件。利用这个组件进行修改文章的内容和查看文章的内容。
 
+### 后端接口文档
 
-
-
-### 后端接口
-
-#### 用户模块
+#### 账户模块
 
 - 登录接口
 
   - 请求方式：POST
-  - 请求路径：/user/login
+  - 请求路径：/login
   - 请求参数：
 
     | 参数名   | 参数类型 | 是否必须 | 说明   |
     | -------- | -------- | -------- | ------ |
     | username | String   | 是       | 用户名 |
     | password | String   | 是       | 密码   |
-
   - 返回参数(校验成功)：
 
     ```json
-	"data": {
-		"uid": 1,
-		"username": "liujitong",
-		"pwd": "1234",
-		"mail": "liumeili666@outlook.com",
-		"url": "https://www.mlxkj.xyz",
-		"screenName": "刘纪彤",
-		"group": "administrator"
-	},
-	"code": "200",
-	"msg": "操作成功"
+    "data": {
+    	"uid": 1,
+    	"username": "liujitong",
+    	"pwd": "1234",
+    	"mail": "liumeili666@outlook.com",
+    	"url": "https://www.mlxkj.xyz",
+    	"screenName": "刘纪彤",
+    	"group": "administrator"
+    },
+    "code": "200",
+    "msg": "操作成功"
     ```
 
     - 返回参数(校验失败)：
 
     ```json
     {
-	"data": null,
-	"code": "-1",
-	"msg": "用户名或密码错误"
+    "data": null,
+    "code": "-1",
+    "msg": "用户名或密码错误"
     }
     ```
+
+- 注册接口
+
+  - 请求方式：POST
+  - 请求路径：/register
+  - 请求参数：
+
+    | 参数名     | 参数类型 | 是否必须 | 说明   |
+    | ---------- | -------- | -------- | ------ |
+    | username   | String   | 是       | 用户名 |
+    | password   | String   | 是       | 密码   |
+
+  - 返回参数：
+
+    ```json
+    {
+    "data": 1,
+    "code": "200",
+    "msg": "操作成功"
+    }
+    ```
+
+    ```json
+    {
+      "data":null,
+      "code":"-1",
+      "msg":"用户名已存在"
+    }
+    ```
+
+- 修改密码接口
+
+  - 请求方式：POST
+  - 请求路径：/changePwd
+  - 请求参数：
+
+    | 参数名     | 参数类型 | 是否必须 | 说明   |
+    | ---------- | -------- | -------- | ------ |
+    | username   | String   | 是       | 用户名 |
+    | password   | String   | 是       | 密码   |
+
+  - 返回参数：
+
+    ```json
+    {
+    "data": 1,
+    "code": "200",
+    "msg": "操作成功"
+    }
+    ```
+
+    ```json
+    {
+      "data":null,
+      "code":"-1",
+      "msg":"用户名不存在"
+    }
+    ```
+
+#### 用户模块
+
+- 获取用户信息
+
+  - 请求方式：GET
+  - 请求路径：/users/{uid}
+  - 请求参数：无
+  - 返回参数：
+
+  ```json
+  {
+    "data": {
+        "uid": 3,
+        "username": "liujitong1",
+        "pwd": "liujitong12",
+        "mail": "sss@s.c",
+        "url": "s.c",
+        "screenName": "sdsd",
+        "group": "visitor"
+    },
+    "code": "200",
+    "msg": "操作成功"
+  }
+  ```
+  
+  ```json
+  {
+    "data": null,
+    "code": "-1",
+    "msg": "用户不存在"
+  }
+  ```
 
 ### 文章模块
 
@@ -100,14 +187,13 @@
   - 请求路径：/blogs/edit
   - 请求参数：
 
-    | 参数名   | 参数类型 | 是否必须 | 说明   |
-    | -------- | -------- | -------- | ------ |
-    | bid      | Integer  | 否       | 文章ID（缺省时为新增文章） |
-    | title    | String   | 是       | 标题   |
-    | content  | String   | 是       | 内容   |
-    | uid | Integer  | 是       | 作者ID |
-    | descp    | String   | 是       | 描述   |
-
+    | 参数名  | 参数类型 | 是否必须 | 说明                       |
+    | ------- | -------- | -------- | -------------------------- |
+    | bid     | Integer  | 否       | 文章ID（缺省时为新增文章） |
+    | title   | String   | 是       | 标题                       |
+    | content | String   | 是       | 内容                       |
+    | uid     | Integer  | 是       | 作者ID                     |
+    | descp   | String   | 是       | 描述                       |
   - 返回参数：
 
     data为新增的文章的ID

@@ -25,7 +25,12 @@ public class UsersController {
 
     @RequestMapping("{uid}")
     public result getUserById(@PathVariable("uid") Integer uid) {
-        return result.succ(usersMapper.selectById(uid));
+        Users user = usersMapper.selectById(uid);
+        if(user == null) {
+            return result.fail("用户不存在");
+        }else {
+            return result.succ(user);
+        }
     }
     @RequestMapping("/edit")
     public result editUser(@RequestBody Users user) {
