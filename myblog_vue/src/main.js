@@ -24,6 +24,12 @@ import "element-ui/lib/theme-chalk/index.css"
 //解决Markdown编辑器的图标不出现问题
 import "mavon-editor/dist/css/index.css"
 Vue.use(mavonEditor)
+//标题
+Vue.directive('title', {
+  inserted: function (el, binding) {
+    document.title = el.dataset.title
+  }
+})
 
 
 new Vue({

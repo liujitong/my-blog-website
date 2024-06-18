@@ -1,6 +1,6 @@
 <script src="../main.js"></script>
 <template>
-    <div>
+    <div v-title data-title="登陆一下再来吧-LJTBLOG">
         <el-container>
             <el-header>
                 <h1>登陆页面</h1>
@@ -27,14 +27,20 @@
                     </el-form-item>
                 </el-form>
             </el-main>
-
+            <Footer></Footer>
         </el-container>
-
+        
     </div>
 </template>
 <script>
     import Header from "../components/Header";
+    import Footer from "../components/Footer";
     export default {
+        name: "Login",
+        components: {
+            Header,
+            Footer
+        },
         data() {
             return {
                 ruleForm: {
@@ -58,7 +64,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         const _this = this;
-                        this.$axios.post('http://localhost:8081/login', this.ruleForm).then(res => {  
+                        this.$axios.post('/api/login', this.ruleForm).then(res => {  
                             console.log(res.data)
                             if (res.data.code =="200") {  
                                 this.$message({  

@@ -18,7 +18,11 @@ import Person from '../views/Person.vue'
 Vue.use(VueRouter)
 
 const routes = [
-
+    //默认跳转blog界面
+    {
+      path: '/',
+      redirect: '/blog'
+    },
     {
         path: '/login',
         name: 'Login',

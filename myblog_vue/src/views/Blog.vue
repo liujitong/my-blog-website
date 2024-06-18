@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header></Header>
-        <div class="block">
+        <div class="block" v-title data-title="刘纪彤的博客-列表">
             <el-timeline>
                 <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogsList">
                     <el-card>
@@ -13,6 +13,7 @@
                 </el-timeline-item>
             </el-timeline>
         </div>
+        
         <el-pagination class="mpage"
                        background
                        layout="prev, pager, next"
@@ -22,14 +23,17 @@
                        @current-change=getBlogsList
         >
         </el-pagination>
+        <Footer></Footer>
     </div>
 </template>
 <script>
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 export default {
     name: "Blog",
     components: {
-        Header
+        Header,
+        Footer
     },
     data(){
         return {
@@ -46,7 +50,7 @@ export default {
         //实现根据页码获取博客列表
         getBlogsList(currentPage){
             console.log(currentPage)
-            this.$axios.get('http://localhost:8081/blogs/list?currentPage='+currentPage).then(res=>{
+            this.$axios.get('/api/blogs/list?currentPage='+currentPage).then(res=>{
                 console.log(res.data.data)
                 this.blogsList=res.data.data.records
                 this.currentPage = res.data.data.current

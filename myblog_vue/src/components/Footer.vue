@@ -1,5 +1,6 @@
 <template>
   <div style="width:300px;margin:0 auto; padding:20px 0;">
+    <p style="text-align:center;">© 2023-2024 刘纪彤的个人博客 <a href="http://github.com/liujitong">刘纪彤</a></p>
     <a
       target="_blank"
       href="https://beian.miit.gov.cn/"

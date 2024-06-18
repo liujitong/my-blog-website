@@ -1,50 +1,51 @@
 <template>
-  <div>
-      <Header></Header>
-      <div class="mblog">
-        <div v-if="ownBlog">
-              <el-link icon="el-icon-edit" v-if="ownBlog">
-                  <!--携带博客ID跳转到编辑页面，对博客进行修改-->
-                  <router-link :to="{name:'BlogEdit',params:{bid: this.blog.bid}}">
-                      编辑
-                  </router-link>
-              </el-link>
+<div v-title :data-title="'Loading-ljtBLog'">
+        <Header></Header>
+        <div class="mblog">
+            <div v-if="ownBlog">
+                        <el-link icon="el-icon-edit" v-if="ownBlog">
+                                <!--携带博客ID跳转到编辑页面，对博客进行修改-->
+                                <router-link :to="{name:'BlogEdit',params:{bid: this.blog.bid}}">
+                                        编辑
+                                </router-link>
+                        </el-link>
 
-              <el-divider direction="vertical"></el-divider>
+                        <el-divider direction="vertical"></el-divider>
 
-              <el-link type="danger" @click="messageHandel" v-if="ownBlog">
-                      删除
-              </el-link>
-          </div>
-            <p>{{ name }}，你正在浏览的是《{{blog.title}}》</p>
-            <p>摘要：{{ blog.descp }}</p>
-            <p>发布时间：{{ blog.created }}</p>
-            <mavon-editor
-                class="markdown"
-                :value="blog.content"
-                :subfield="false"
-                defaultOpen="preview"
-                :toolbarsFlag="false"
-                :editable="false"
-                :scrollStyle="true"
-                style="min-height:20px"
-            ></mavon-editor>   
-      </div>
-      <el-dialog
-              :title="title"
-              :visible.sync="centerDialogVisible"
-              width="30%"
-              center>
-      <span slot="footer" class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="deleteBlog">确 定</el-button>
-      </span>
-      </el-dialog>
+                        <el-link type="danger" @click="messageHandel" v-if="ownBlog">
+                                        删除
+                        </el-link>
+                </div>
+                    <p>{{ name }}，你正在浏览的是《{{blog.title}}》</p>
+                    <p>摘要：{{ blog.descp }}</p>
+                    <p>发布时间：{{ blog.created }}</p>
+                    <mavon-editor
+                            class="markdown"
+                            :value="blog.content"
+                            :subfield="false"
+                            defaultOpen="preview"
+                            :toolbarsFlag="false"
+                            :editable="false"
+                            :scrollStyle="true"
+                            style="min-height:20px"
+                    ></mavon-editor>   
+        </div>
+        <el-dialog
+                        :title="title"
+                        :visible.sync="centerDialogVisible"
+                        width="30%"
+                        center>
+        <span slot="footer" class="dialog-footer">
+                <el-button @click="centerDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="deleteBlog">确 定</el-button>
+        </span>
+        </el-dialog>
   </div>
 </template>
 <script>
     // 导入所需依赖
-    import Header from "../components/Header";
+
+import Header from "../components/Header";
 
     export default {
         name: "BlogDetail",
@@ -73,7 +74,7 @@
             const _this = this;
             const blogid = this.$route.params.bid;
             //调用数据库查询博客详情
-            this.$axios.get('http://localhost:8081/blogs/'+blogid).then(res => {
+            this.$axios.get('/api/blogs/'+blogid).then(res => {
                 console.log(res.data.code)
                 if(res.data.code !== "200"){
                     this.$message.error("获取博客详情失败")
@@ -94,6 +95,7 @@
                 if(_this.$store.getters.getUserInfo.group === "administrator"){
                     _this.ownBlog = true
                 }
+                document.title = '您正在观看的是'+'《'+_this.blog.title+'》'
             })
 
 
@@ -107,7 +109,7 @@
                 const blogid = this.blog.bid
                 //获取正在登录的用户的uid
                 const uid = this.$store.getters.getUserInfo.uid
-                this.$axios.get('http://localhost:8081/blogs/delete/'+blogid+'?uid='+uid).then(res=>{
+                this.$axios.get('/api/blogs/delete/'+blogid+'?uid='+uid).then(res=>{
                     if(res.data.code === "200"){
                         this.$message.success("删除成功")
                         _this.$router.push({path: '/blog'})

@@ -1,6 +1,6 @@
 <script src="../main.js"></script>
 <template>
-    <div>
+    <div v-title data-title="刘纪彤的博客-注册">
         <el-container>
             <el-header>
                 <h1>注册页面</h1>
@@ -76,7 +76,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         const _this = this;
-                        this.$axios.post('http://localhost:8081/register', {
+                        this.$axios.post('/api/register', {
                             username: this.ruleForm.username,
                             password: this.ruleForm.password
                         }).then(res => {

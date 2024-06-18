@@ -1,6 +1,6 @@
 <script src="../main.js"></script>
 <template>
-    <div>
+    <div v-title data-title="刘纪彤的博客-重置密码">
         <el-container>
             <el-header>
                 <h1>重置密码</h1>
@@ -76,7 +76,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         const _this = this;
-                        this.$axios.post('http://localhost:8081/changePwd', {
+                        this.$axios.post('/api/changePwd', {
                             username: this.ruleForm.username,
                             password: this.ruleForm.password
                         }).then(res => {

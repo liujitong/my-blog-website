@@ -1,6 +1,6 @@
 <script src="../main.js"></script>
 <template>
-    <div>
+    <div v-title data-title="刘纪彤的博客-编辑">
         <Header></Header>
         <div class="edit">
             <el-form v-loading="loading_s" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -70,7 +70,7 @@
                         //RuleForm添加uid
                         this.ruleForm.uid = this.$store.getters.getUserInfo.uid;
                         //Created为当前时间戳
-                        this.$axios.post('http://localhost:8081/blogs/edit', this.ruleForm).then(res => {
+                        this.$axios.post('/api/blogs/edit', this.ruleForm).then(res => {
                             console.log(res.data)
                             if (res.data.code == "200") {
                                 this.$message({
@@ -108,7 +108,7 @@
             const _this = this;
 
             //调用数据库查询博客详情
-            this.$axios.get('http://localhost:8081/blogs/'+blogid).then(res => {
+            this.$axios.get('/api/blogs/'+blogid).then(res => {
                 console.log(res.data)
                 this.ruleForm = res.data.data;
                 this.ruleForm.descp = res.data.data.descp;

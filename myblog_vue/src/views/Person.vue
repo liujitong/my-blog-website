@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-title data-title="我的信息">
     <div v-loading="loading_S">    <el-card>
       <el-descriptions class="margin-top" title="用户信息" :column="2" >
         <template slot="extra">
@@ -51,7 +51,7 @@
       </el-descriptions>
     </el-card>
   </div>
-
+  <Footer></Footer>
   <el-dialog
   title="修改个人信息"
   :visible.sync="dialogVisible"
@@ -90,8 +90,12 @@
 </div>
 </template>
 <script>
+import Footer from '@/components/Footer.vue';
 export default {
   name: "Person",
+  components: {
+    Footer
+  },
   data(){
     return {
       dialogVisible: false,
@@ -118,7 +122,7 @@ export default {
       .catch(_ => {});
     },
     submit(){
-      this.$axios.put("http://localhost:8081/users/edit/",this.this_user).then(res1=>{
+      this.$axios.put("/api/users/edit/",this.this_user).then(res1=>{
         if(res1.data.code=="200"){
           this.$message({
             message: "修改成功",
@@ -137,7 +141,7 @@ export default {
   created(){
     //根据路由得来的uid，获取用户信息
     const uid = this.$route.params.uid;
-    this.$axios.get("http://localhost:8081/users/"+uid).then(res1=>{
+    this.$axios.get("/api/users/"+uid).then(res1=>{
       if(res1.data.code=="200"){
         this.$message({
           message: "获取用户信息成功",
