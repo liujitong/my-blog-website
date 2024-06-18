@@ -6,23 +6,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import xyz.mlxkj.myblog_server.common.LoginMsg;
+import xyz.mlxkj.myblog_server.common.AccountMsg;
 import xyz.mlxkj.myblog_server.common.result;
-import xyz.mlxkj.myblog_server.dao.UsersMapper;
-import xyz.mlxkj.myblog_server.model.Users;
-import xyz.mlxkj.myblog_server.service.IUsersService;
 import xyz.mlxkj.myblog_server.service.impl.UsersServiceImpl;
 
-
-import javax.servlet.http.HttpServletResponse;
-
 @RestController
-public class LoginController {
+public class AccountController {
     @Autowired
     private UsersServiceImpl usi;
     @PostMapping("/login")
-    public result login(@Validated @RequestBody LoginMsg lms){
+    public result login(@Validated @RequestBody AccountMsg lms){
         return usi.login(lms.getUsername(),lms.getPassword());
+    }
+    @PostMapping("/register")
+    public result register(@Validated @RequestBody AccountMsg lms) {
+        return usi.register(lms.getUsername(), lms.getPassword());
     }
 
 }

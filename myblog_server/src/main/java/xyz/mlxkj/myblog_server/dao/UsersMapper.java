@@ -21,4 +21,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface UsersMapper extends BaseMapper<Users> {
     @Select("select * from users where username = #{username} and pwd = #{pwd}")
     Users searchByUsernameaAndPwd(@Param("username") String username,@Param("pwd") String pwd);
+
+    @Select("select * from users where username = #{username}")
+    Users searchByUsername(String username);
 }

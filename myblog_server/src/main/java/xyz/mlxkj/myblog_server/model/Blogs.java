@@ -62,7 +62,7 @@ public class Blogs implements Serializable {
     /**
      * 创建时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd-HH-mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @TableField("created")
     private LocalDateTime created;
 }

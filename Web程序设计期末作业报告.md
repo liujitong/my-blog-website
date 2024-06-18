@@ -26,7 +26,30 @@
 
 ## 系统总体设计
 
+### 系统架构设计
+
+#### 前端架构
+
+前端使用Vue.js框架，使用Vue Router进行路由管理，使用Vuex进行状态管理，使用axios进行网络请求。
+
+#### 后端架构
+
+后端使用SpringBoot框架，使用MyBatis-plus进行数据库操作。Mysql作为数据库。
+
 ## 详细设计与实现
+
+### 前端设计与实现
+
+#### 用户模块
+
+#### 博客模块
+
+##### 博客详细信息模块
+
+我们使用了现在比较流行的轻量化标记语言Markdown来书写博客，所以我们需要一个Markdown编辑器来编辑博客。在此我引入了`mavon-editor`这个Vue.js的Markdown编辑器组件。同时用`github-markdown-css`来渲染Markdown文本。用`markdown-it`来解析Markdown文本。
+
+
+
 
 ### 后端接口
 

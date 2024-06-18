@@ -1,5 +1,8 @@
 package xyz.mlxkj.myblog_server.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import xyz.mlxkj.myblog_server.common.result;
 import xyz.mlxkj.myblog_server.dao.UsersMapper;
@@ -63,5 +66,29 @@ public class BlogsServiceImpl extends ServiceImpl<BlogsMapper, Blogs> implements
             }
         }
 
+    }
+
+    @Override
+    public result getBlogList(Integer currentPage) {
+        //根据currentPage为页数，以created倒序排列
+        Page page = new Page(currentPage, 5);
+        IPage<Blogs> pageData = blogsMapper.selectPage(page,  new QueryWrapper<Blogs>().orderByDesc("created"));
+        return result.succ(pageData);
+    }
+
+    @Override
+    public result deleteBlog(Integer bid, Long uid) {
+        //如果uid是管理员或者uid和bid的uid一致
+        System.out.println("uid"+uid);
+        System.out.println("bid"+bid);
+        Blogs blog = blogsMapper.selectById(bid);
+        Users user = usersMapper.selectById(uid);
+        if(blog.getUid()==uid||user.getGroup().equals("administrator")){
+            blogsMapper.deleteById(bid);
+            return result.succ("删除成功");
+        }
+        else {
+            return result.fail("无权限删除");
+        }
     }
 }

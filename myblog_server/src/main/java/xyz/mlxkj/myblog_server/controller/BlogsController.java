@@ -41,5 +41,14 @@ public class BlogsController {
         }
     }
 
+    @GetMapping("/list")
+    public result getBlogList(@RequestParam(defaultValue = "1") Integer currentPage){
+        //分页查询
+        return blogsService.getBlogList(currentPage);
+    }
 
+    @GetMapping("/delete/{bid}")
+    public result deleteBlog(@PathVariable(name="bid") Integer bid,@RequestParam() Long uid){
+        return blogsService.deleteBlog(bid,uid);
+    }
 }

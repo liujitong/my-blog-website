@@ -15,7 +15,7 @@ server:
   port: 8081
 
 hikari:
-  connection-timeout: 60000   # 数据库连接超时时间,默认30秒,即30000
+  connection-timeout: 30000   # 数据库连接超时时间,默认30秒,即30000
   validation-timeout: 3000    # 指定验证连接有效性的超时时间(默认是5秒,最小不能小于250毫秒)
   idle-timeout: 60000         # 空闲连接超时时间,一个连接idle状态的最大时长（毫秒）,超时则被释放（retired）,默认是10分钟,只有空闲连接数大于最大连接数且空闲时间超过该值,才会被释放
   login-timeout: 5            # 指定连接数据库的超时时间,单位:秒

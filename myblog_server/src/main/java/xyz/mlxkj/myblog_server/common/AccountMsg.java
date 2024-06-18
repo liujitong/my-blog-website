@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 //登录信息中间层
 @Data
-public class LoginMsg implements Serializable{
+public class AccountMsg implements Serializable{
 
     @NotBlank(message = "用户名不能为空")
     private String username;

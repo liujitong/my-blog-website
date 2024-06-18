@@ -15,4 +15,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IBlogsService extends IService<Blogs> {
 
     result editBlog(Blogs blog);
+
+    result getBlogList(Integer currentPage);
+
+    result deleteBlog(Integer bid, Long uid);
 }

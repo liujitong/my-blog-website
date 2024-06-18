@@ -1,8 +1,9 @@
+<script src="../main.js"></script>
 <template>
     <div>
         <Header></Header>
-        <div class="m_content">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <div class="edit">
+            <el-form v-loading="loading_s" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="标题" prop="title">
                     <el-input v-model="ruleForm.title"></el-input>
                 </el-form-item>
@@ -21,12 +22,13 @@
                 </el-form-item>
             </el-form>
         </div>
+        <Footer></Footer>
     </div>
+
 </template>
 <script>
     import Header from "../components/Header";
-
-
+    import Footer from "../components/Footer";
     export default {
         data() {
             return {
@@ -36,6 +38,7 @@
                     descp: '',
                     content: ''
                 },
+                loading_s: true,
                 rules: {
                     title: [
                         { required: true, message: '请输入标题', trigger: 'blur' },
@@ -53,21 +56,11 @@
             };
         },
         //初始化操作
-        created() {
-            const _this = this;
-            const blogid = this.$route.params.bid;
-            //调用数据库查询博客详情
-            this.$axios.get('http://localhost:8081/blogs/'+blogid).then(res => {
-                console.log(res.data)
-                this.ruleForm = res.data.data;
-                this.ruleForm.descp = res.data.data.descp;
-                console.log(this.ruleForm)
-            })
 
-        },
 
         components: {
-            Header
+            Header,
+            Footer
         },
         methods: {
             async submitForm(formName) {
@@ -100,12 +93,40 @@
 
             resetForm(formName) {
                 this.$refs[formName].resetFields();
+            },
+            
+        },
+        created() {
+            
+            this.ruleForm.bid = this.$route.params.bid;
+            console.log(this.ruleForm.bid)
+            const blogid = this.$route.params.bid;
+            if(this.ruleForm.bid == ''||this.ruleForm.bid == undefined){
+                this.loading_s = false;
+                return
             }
-        }
-    }
+            const _this = this;
+
+            //调用数据库查询博客详情
+            this.$axios.get('http://localhost:8081/blogs/'+blogid).then(res => {
+                console.log(res.data)
+                this.ruleForm = res.data.data;
+                this.ruleForm.descp = res.data.data.descp;
+                this.loading_s = false;
+                console.log(this.ruleForm)
+            }).catch(err => {
+                //element-ui的message提示
+                this.loading_s = false;
+                this.$message.error("获取博客详情失败"+err)
+            })
+        },
+}
 </script>
 <style scoped>
-    .m_content {
-        margin: 0 auto;
+
+    .edit {
+        margin: 0 auto;        
     }
+
+
 </style>

@@ -10,8 +10,9 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Blog from '../views/Blog.vue'
 import BlogEdit from '../views/BlogEdit.vue'
-// import BlogDetail from '../views/BlogDetail.vue'
-
+import BlogView from '../views/BlogView.vue'
+import Register from '../views/Register.vue'
+import Person from '../views/Person.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,24 @@ const routes = [
           requireAuth: true
       }
     },
+    {
+      path:'/blog/:bid',
+      name: 'BlogView',
+      component: BlogView,
+    },
+    {
+      path:'/register',
+      name: 'Register',
+      component: Register
+    },
+    {
+      path:'/Person/:uid',
+      name: 'Person',
+      component:Person,
+      meta: {
+          requireAuth: true
+      }
+    }
 ]
 
 const router = new VueRouter({

@@ -15,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUsersService extends IService<Users> {
     public result login(String username, String pwd);
+
+    result register(String username, String password);
 }

@@ -3,7 +3,7 @@
     <div>
         <el-container>
             <el-header>
-                <h1>登陆页面</h1>
+                <h1>注册页面</h1>
             </el-header>
 
             <!--登录表单-->
@@ -17,12 +17,12 @@
                         <el-input type="password" v-model="ruleForm.password"></el-input>
                     </el-form-item>
 
+                    <el-form-item label="确认密码" prop ="password_2">
+                        <el-input type="password" v-model="ruleForm.password_2"></el-input>
+                    </el-form-item>
+
                     <el-form-item>
-                        <el-link  class="pwd" type="primary" href="/resetPwd">重置密码</el-link>
-                    <el-divider direction="vertical"></el-divider>
-                    <el-link  class="res" type="primary" href="/register">注册账户</el-link>
-                    <br>
-                        <el-button type="primary" @click="submitForm('ruleForm')">立即登录</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
                         <el-button @click="resetForm('ruleForm')">清空</el-button>
                     </el-form-item>
                 </el-form>
@@ -36,10 +36,25 @@
     import Header from "../components/Header";
     export default {
         data() {
+                // 重复密码验证
+                const pwdAgainCheck = async(rule, value, callback) => {
+                if (value.length < 1) {
+                    this.changeAgainFlag = 2;
+                    return callback(new Error('重复密码不能为空！'));
+                } else if(this.ruleForm.password != this.ruleForm.password_2){
+                    this.changeAgainFlag = 2;
+                    return callback(new Error('两次输入密码不一致！'));
+                }else{
+                    this.changeAgainFlag = 1;
+                    callback()
+                }}
             return {
+                changeFlag: 0,
+                changeAgainFlag: 0,
                 ruleForm: {
                     username: '',
-                    password: ''
+                    password: '',
+                    password_2:''
                 },
                 rules: {
                     username: [
@@ -49,48 +64,50 @@
                     password: [
                         { required: true, message: '请输入密码', trigger: 'blur' },
                         { min: 6, max: 20, message: '长度在 6 到 20 个字符', trigger: 'blur' }
+                    ],
+                    password_2:[
+                        { required: true, validator: pwdAgainCheck, trigger: 'blur' },
                     ]
                 }
             };
         },
         methods: {
-            async submitForm(formName) {  
+            submitForm(formName) {  
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         const _this = this;
-                        this.$axios.post('http://localhost:8081/login', this.ruleForm).then(res => {  
-                            console.log(res.data)
-                            if (res.data.code =="200") {  
-                                this.$message({  
-                                    message: '登录成功',  
-                                    type: 'success'  
-                                })
-                                const userInfo = res.data.data
-                                console.log(userInfo)
-                                _this.$store.commit('SET_USERINFO',userInfo)
-                                console.log(_this.$store.getters.getUserInfo)
-                                _this.$router.push({path: '/blog'})
-                            } else {  
-                                this.$message({  
-                                    message: '登录失败',  
-                                    type: 'error'  
-                                })  
+                        this.$axios.post('http://localhost:8081/register', {
+                            username: this.ruleForm.username,
+                            password: this.ruleForm.password
+                        }).then(res => {
+                            if (res.data.code == "200") {
+                                this.$message({
+                                    message: '注册成功',
+                                    type: 'success'
+                                });
+                                this.$router.push('/login');
+                            } else {
+                                this.$message({
+                                    message: res.data.msg,
+                                    type: 'error'
+                                });
                             }
-                        }).catch(err => {  
-                            this.$message.error("服务端出现问题"+err) 
-                        })
+                        }).catch(err => {
+                            this.$message.error("服务端出现问题" + err);
+                        });
                     } else {
-                        console.log('表单验证失败')
+                        this.$message.error("表单验证失败");
                         return false;
                     }
                 });
             },
-resetForm(formName) {  
-    // 重置表单  
-    this.$refs[formName].resetFields();  
-}
+            resetForm(formName) {  
+            // 重置表单  
+        this.$refs[formName].resetFields();  
         }
-    }
+            },
+
+        }
 
 </script>
 <style scoped>

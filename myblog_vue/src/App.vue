@@ -4,6 +4,17 @@
   </div>
 </template>
 
+<script>
+import {startSakura} from './js/Sakura.js';
+export default {
+  name: 'App',
+  created(){
+    startSakura();
+  }
+}
+
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

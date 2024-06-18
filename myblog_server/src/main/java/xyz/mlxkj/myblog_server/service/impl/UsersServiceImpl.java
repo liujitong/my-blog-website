@@ -28,4 +28,23 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         }
         return result.succ(user);
     }
+
+    @Override
+    public result register(String username, String password) {
+        Users user = usersMapper.searchByUsername(username);
+        if(user != null) {
+            return result.fail("用户名已存在");
+        }
+        Users newUser = new Users();
+        newUser.setUsername(username);
+        newUser.setPwd(password);
+        newUser.setGroup("visitor");
+        usersMapper.insert(newUser);
+        if(newUser.getUid() != null) {
+            return result.succ("注册成功");
+        }
+        else {
+            return result.fail("注册失败");
+        }
+    }
 }
