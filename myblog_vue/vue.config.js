@@ -3,6 +3,9 @@ module.exports = defineConfig({
   transpileDependencies: true
 })
 module.exports = {
+  publicPath: "./",
+  productionSourceMap: false, //不输出map文件
+
   devServer: {
     host: 'localhost',
     open: true, // 自动打开浏览器
@@ -10,7 +13,7 @@ module.exports = {
     // 例如将'localhost:8080/api/xxx'代理到'www.example.com/xxx'
     proxy: {
       '/api': {
-        target: 'http://localhost:8081',
+        target: 'http://111.229.170.185:8089',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

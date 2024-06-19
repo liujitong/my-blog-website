@@ -30,6 +30,7 @@
                             style="min-height:20px"
                     ></mavon-editor>   
         </div>
+        <Footer></Footer>
         <el-dialog
                         :title="title"
                         :visible.sync="centerDialogVisible"
@@ -46,10 +47,10 @@
     // 导入所需依赖
 
 import Header from "../components/Header";
-
+import Footer from '@/components/Footer.vue';
     export default {
         name: "BlogDetail",
-        components: {Header},
+        components: {Header,Footer},
         data() {
             return {
                 centerDialogVisible: false,

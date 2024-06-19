@@ -3,7 +3,7 @@
         <Header></Header>
         <div class="block" v-title data-title="刘纪彤的博客-列表">
             <el-timeline>
-                <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogsList">
+                <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogsList" v-loading="loading_S">
                     <el-card>
                         <router-link :to="{name:'BlogView',params:{bid:blog.bid}}">
                             <h4>{{blog.title}}</h4>
@@ -41,6 +41,7 @@ export default {
             currentPage:1,//当前页
             total : 0,//总数
             pageSize: 5,//每页显示的条数
+            loading_S : true
         }
     },
     created(){
@@ -56,6 +57,7 @@ export default {
                 this.currentPage = res.data.data.current
                 this.total = res.data.data.total
                 this.pageSize = res.data.data.size
+                this.loading_S = false
             })
         }
     },

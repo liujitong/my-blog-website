@@ -84,10 +84,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
-                <configuration>
-                    <mainClass>xyz.mlxkj.myblog_server.MyblogServerApplication</mainClass>
-                    <skip>true</skip>
-                </configuration>
+<!--                <configuration>-->
+<!--                    <mainClass>xyz.mlxkj.myblog_server.MyblogServerApplication</mainClass>-->
+<!--                    <skip>true</skip>-->
+<!--                </configuration>-->
+
                 <executions>
                     <execution>
                         <id>repackage</id>
@@ -96,6 +97,10 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                    <mainClass>xyz.mlxkj.myblog_server.MyblogServerApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

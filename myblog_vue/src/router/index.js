@@ -76,10 +76,12 @@ const routes = [
     }
 ]
 
+// router/index.js
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes
+  mode: 'hash',
+  base: process.env.BASE_URL,
+  routes
 })
+
 
 export default router

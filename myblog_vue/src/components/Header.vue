@@ -5,7 +5,7 @@
     <div class="block">
       <el-avatar
         :size="100"
-        src="https://www.mlxkj.xyz/logo.jpg"
+        :src="require('../assets/logo.png')"
       ></el-avatar>
     </div>
 

@@ -32,15 +32,15 @@ public class UsersController {
             return result.succ(user);
         }
     }
-    @RequestMapping("/edit")
-    public result editUser(@RequestBody Users user) {
-        System.out.println("user:"+user);
-        //如果user不在数据库中，返回错误
-        if(usersMapper.selectById(user.getUid()) == null) {
-            return result.fail("用户不存在");
+        @RequestMapping("/edit")
+        public result editUser(@RequestBody Users user) {
+            System.out.println("user:"+user);
+            //如果user不在数据库中，返回错误
+            if(usersMapper.selectById(user.getUid()) == null) {
+                return result.fail("用户不存在");
+            }
+            usersMapper.updateById(user);
+            return result.succ("修改成功");
         }
-        usersMapper.updateById(user);
-        return result.succ("修改成功");
-    }
 
 }

@@ -46,7 +46,7 @@
             用户组
           </template>
           <a v-if="this_user.group==='visitor'">访客</a>
-          <a v-if="this_user.group==='adminstrator'">管理员</a>
+          <a v-if="this_user.group==='administrator'">管理员</a>
         </el-descriptions-item>
       </el-descriptions>
     </el-card>
@@ -112,7 +112,16 @@ export default {
   },
   methods:{
     messageHandel(){
-      this.dialogVisible = true;
+      //如果路由id和用户id相同，弹出修改框
+      if(this.$route.params.uid==this.$store.getters.getUserInfo.uid) this.dialogVisible = true;
+      //否则提示无权限
+      else this.$message({
+        message: "无权限",
+        type: "error"
+      });
+      //如果该用户是管理员，可以修改其他用户信息
+      if(this.$store.getters.getUserInfo.group=="administrator") this.dialogVisible = true;
+      
     },
     handleClose(done){
       this.$confirm('确认关闭？')
