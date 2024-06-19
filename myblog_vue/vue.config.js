@@ -3,9 +3,7 @@ module.exports = defineConfig({
   transpileDependencies: true
 })
 module.exports = {
-  publicPath: "./",
-  productionSourceMap: false, //不输出map文件
-
+  
   devServer: {
     host: 'localhost',
     open: true, // 自动打开浏览器

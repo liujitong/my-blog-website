@@ -17,68 +17,68 @@ import Person from '../views/Person.vue'
 
 Vue.use(VueRouter)
 
+
 const routes = [
-    //默认跳转blog界面
-    {
-      path: '/',
-      redirect: '/blog'
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login
-    },
-    {
-      path:'/blog',
-      name: 'Blog',
-      component:Blog
-    },
-    {
-      path: '/blog/add',
-      name: 'BlogAdd',
-      component: BlogEdit,
-      //添加权限访问，表示只有登录之后才能进行该操作
-      meta: {
-          requireAuth: true
-      }
-    },
-    {
-      path: '/blog/:bid/edit',
-      name: 'BlogEdit',
-      component: BlogEdit,
-      //添加权限访问，表示只有登录之后才能进行该操作
-      meta: {
-          requireAuth: true
-      }
-    },
-    {
-      path:'/blog/:bid',
-      name: 'BlogView',
-      component: BlogView,
-    },
-    {
-      path:'/register',
-      name: 'Register',
-      component: Register
-    },
-    {
-      path:'/Person/:uid',
-      name: 'Person',
-      component:Person,
-      meta: {
-          requireAuth: true
-      }
-    },
-    {
-      path:'/resetpwd',
-      name: 'ResetPwd',
-      component: ResetPwd
+  //默认跳转blog界面
+  {
+    path: '/',
+    redirect: '/blog'
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/blog',
+    name: 'Blog',
+    component: Blog
+  },
+  {
+    path: '/blog/add',
+    name: 'BlogAdd',
+    component: BlogEdit,
+    //添加权限访问，表示只有登录之后才能进行该操作
+    meta: {
+      requireAuth: true
     }
+  },
+  {
+    path: '/blog/:bid/edit',
+    name: 'BlogEdit',
+    component: BlogEdit,
+    //添加权限访问，表示只有登录之后才能进行该操作
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/blog/:bid',
+    name: 'BlogView',
+    component: BlogView,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/Person/:uid',
+    name: 'Person',
+    component: Person,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/resetpwd',
+    name: 'ResetPwd',
+    component: ResetPwd
+  }
 ]
 
-// router/index.js
 const router = new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
