@@ -2,9 +2,10 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://111.229.170.185:3306/myblog?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2b8&autoReconnect=true
-    username: myblog
-    password: liujitong0A
+    url: jdbc:mysql:/ip:3306/myblog?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2b8&autoReconnect=true
+    username: yourusername
+    password: databasepassword
+#url:访问地址，username :数据库用户名 password:数据库密码
 
 #指定mybatisPlus扫描的xml文件
 mybatis-plus:
